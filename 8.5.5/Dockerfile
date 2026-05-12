@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     bison \
     re2c \
     git \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone --branch php-8.5.5 --depth 1 https://github.com/php/php-src.git /php-src \

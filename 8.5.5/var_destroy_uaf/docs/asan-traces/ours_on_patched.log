@@ -1,0 +1,107 @@
+[main] outer call (payload 25822 bytes)
+[A::__destruct] inner R: backref
+=================================================================
+==1237122==ERROR: AddressSanitizer: heap-use-after-free on address 0x7e02a7a9f900 at pc 0x55e63dab8c3f bp 0x7fff58970d90 sp 0x7fff58970d88
+READ of size 8 at 0x7e02a7a9f900 thread T0
+    #0 0x55e63dab8c3e in php_var_unserialize /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:849
+    #1 0x55e63dacd669 in php_unserialize_with_options /root/php-audit/php-8.5.5/ext/standard/var.c:1464
+    #2 0x55e63dace12f in zif_unserialize /root/php-audit/php-8.5.5/ext/standard/var.c:1522
+    #3 0x55e63de3cd13 in ZEND_DO_ICALL_SPEC_RETVAL_USED_HANDLER /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:1421
+    #4 0x55e63df9bce3 in execute_ex /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:116419
+    #5 0x55e63de03dac in zend_call_function /root/php-audit/php-8.5.5/Zend/zend_execute_API.c:1010
+    #6 0x55e63de04d98 in zend_call_known_function /root/php-audit/php-8.5.5/Zend/zend_execute_API.c:1104
+    #7 0x55e63e0a686c in zend_call_known_instance_method /root/php-audit/php-8.5.5/Zend/zend_API.h:866
+    #8 0x55e63e0a68a6 in zend_call_known_instance_method_with_0_params /root/php-audit/php-8.5.5/Zend/zend_API.h:872
+    #9 0x55e63e0a779b in zend_objects_destroy_object /root/php-audit/php-8.5.5/Zend/zend_objects.c:172
+    #10 0x55e63e0a4d4a in zend_objects_store_del /root/php-audit/php-8.5.5/Zend/zend_objects_API.c:181
+    #11 0x55e63e0f449b in rc_dtor_func /root/php-audit/php-8.5.5/Zend/zend_variables.c:57
+    #12 0x55e63dab27dc in i_zval_ptr_dtor /root/php-audit/php-8.5.5/Zend/zend_variables.h:45
+    #13 0x55e63dab503e in var_destroy /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:309
+    #14 0x55e63dab34a5 in php_var_unserialize_destroy /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:88
+    #15 0x55e63dacdb6a in php_unserialize_with_options /root/php-audit/php-8.5.5/ext/standard/var.c:1498
+    #16 0x55e63dace12f in zif_unserialize /root/php-audit/php-8.5.5/ext/standard/var.c:1522
+    #17 0x55e63de3cd13 in ZEND_DO_ICALL_SPEC_RETVAL_USED_HANDLER /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:1421
+    #18 0x55e63df9bce3 in execute_ex /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:116419
+    #19 0x55e63dfafe9e in zend_execute /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:121902
+    #20 0x55e63e10e8f2 in zend_execute_script /root/php-audit/php-8.5.5/Zend/zend.c:1977
+    #21 0x55e63db5ded4 in php_execute_script_ex /root/php-audit/php-8.5.5/main/main.c:2641
+    #22 0x55e63db5e2c8 in php_execute_script /root/php-audit/php-8.5.5/main/main.c:2681
+    #23 0x55e63e114245 in do_cli /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:951
+    #24 0x55e63e1167e6 in main /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:1362
+    #25 0x7fb2a8429f67  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x29f67) (BuildId: 666f6ca8b64b431bce510d38dfe7792d7cf4202c)
+    #26 0x7fb2a842a024 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a024) (BuildId: 666f6ca8b64b431bce510d38dfe7792d7cf4202c)
+    #27 0x55e63d002690 in _start (/root/php-audit/php-8.5.5/sapi/cli/php+0x402690) (BuildId: 8e1858515e0760be2b9308b771680de22f07cce4)
+
+0x7e02a7a9f900 is located 0 bytes inside of 8160-byte region [0x7e02a7a9f900,0x7e02a7aa18e0)
+freed by thread T0 here:
+    #0 0x7fb2a892340f in free ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:51
+    #1 0x55e63dd0a5a6 in __zend_free /root/php-audit/php-8.5.5/Zend/zend_alloc.c:3571
+    #2 0x55e63dd065d0 in _efree /root/php-audit/php-8.5.5/Zend/zend_alloc.c:2790
+    #3 0x55e63dab44c6 in var_destroy /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:245
+    #4 0x55e63dab34a5 in php_var_unserialize_destroy /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:88
+    #5 0x55e63dacdb6a in php_unserialize_with_options /root/php-audit/php-8.5.5/ext/standard/var.c:1498
+    #6 0x55e63dace12f in zif_unserialize /root/php-audit/php-8.5.5/ext/standard/var.c:1522
+    #7 0x55e63de3cd13 in ZEND_DO_ICALL_SPEC_RETVAL_USED_HANDLER /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:1421
+    #8 0x55e63df9bce3 in execute_ex /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:116419
+    #9 0x55e63dfafe9e in zend_execute /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:121902
+    #10 0x55e63e10e8f2 in zend_execute_script /root/php-audit/php-8.5.5/Zend/zend.c:1977
+    #11 0x55e63db5ded4 in php_execute_script_ex /root/php-audit/php-8.5.5/main/main.c:2641
+    #12 0x55e63db5e2c8 in php_execute_script /root/php-audit/php-8.5.5/main/main.c:2681
+    #13 0x55e63e114245 in do_cli /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:951
+    #14 0x55e63e1167e6 in main /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:1362
+    #15 0x7fb2a8429f67  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x29f67) (BuildId: 666f6ca8b64b431bce510d38dfe7792d7cf4202c)
+
+previously allocated by thread T0 here:
+    #0 0x7fb2a892435f in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x55e63dd0a46a in __zend_malloc /root/php-audit/php-8.5.5/Zend/zend_alloc.c:3543
+    #2 0x55e63dd064f7 in _emalloc /root/php-audit/php-8.5.5/Zend/zend_alloc.c:2780
+    #3 0x55e63dab37f3 in var_push /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:125
+    #4 0x55e63dab8f10 in php_var_unserialize_internal /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:886
+    #5 0x55e63dab6263 in process_nested_array_data /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:506
+    #6 0x55e63dabde9f in php_var_unserialize_internal /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:1742
+    #7 0x55e63dab8c68 in php_var_unserialize /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:852
+    #8 0x55e63dacd669 in php_unserialize_with_options /root/php-audit/php-8.5.5/ext/standard/var.c:1464
+    #9 0x55e63dace12f in zif_unserialize /root/php-audit/php-8.5.5/ext/standard/var.c:1522
+    #10 0x55e63de3cd13 in ZEND_DO_ICALL_SPEC_RETVAL_USED_HANDLER /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:1421
+    #11 0x55e63df9bce3 in execute_ex /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:116419
+    #12 0x55e63dfafe9e in zend_execute /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:121902
+    #13 0x55e63e10e8f2 in zend_execute_script /root/php-audit/php-8.5.5/Zend/zend.c:1977
+    #14 0x55e63db5ded4 in php_execute_script_ex /root/php-audit/php-8.5.5/main/main.c:2641
+    #15 0x55e63db5e2c8 in php_execute_script /root/php-audit/php-8.5.5/main/main.c:2681
+    #16 0x55e63e114245 in do_cli /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:951
+    #17 0x55e63e1167e6 in main /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:1362
+    #18 0x7fb2a8429f67  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x29f67) (BuildId: 666f6ca8b64b431bce510d38dfe7792d7cf4202c)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:849 in php_var_unserialize
+Shadow bytes around the buggy address:
+  0x7e02a7a9f680: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7e02a7a9f700: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7e02a7a9f780: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7e02a7a9f800: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7e02a7a9f880: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=>0x7e02a7a9f900:[fd]fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7e02a7a9f980: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7e02a7a9fa00: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7e02a7a9fa80: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7e02a7a9fb00: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7e02a7a9fb80: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1237122==ABORTING

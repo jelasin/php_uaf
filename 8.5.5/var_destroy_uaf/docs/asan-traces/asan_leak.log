@@ -1,0 +1,44 @@
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1233661==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x556679ab16c8 bp 0x7fffc251c6e0 sp 0x7fffc251c6d0 T0)
+==1233661==The signal is caused by a READ memory access.
+==1233661==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x556679ab16c8 in zval_get_type /root/php-audit/php-8.5.5/Zend/zend_types.h:670
+    #1 0x556679abab39 in php_var_unserialize_internal /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:1230
+    #2 0x556679ab8c68 in php_var_unserialize /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:852
+    #3 0x556679acd669 in php_unserialize_with_options /root/php-audit/php-8.5.5/ext/standard/var.c:1464
+    #4 0x556679ace12f in zif_unserialize /root/php-audit/php-8.5.5/ext/standard/var.c:1522
+    #5 0x556679e3c62d in ZEND_DO_ICALL_SPEC_RETVAL_UNUSED_HANDLER /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:1355
+    #6 0x556679f9bc99 in execute_ex /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:116414
+    #7 0x556679e03dac in zend_call_function /root/php-audit/php-8.5.5/Zend/zend_execute_API.c:1010
+    #8 0x556679e04d98 in zend_call_known_function /root/php-audit/php-8.5.5/Zend/zend_execute_API.c:1104
+    #9 0x55667a0a67ea in zend_call_known_instance_method /root/php-audit/php-8.5.5/Zend/zend_API.h:866
+    #10 0x55667a0a6824 in zend_call_known_instance_method_with_0_params /root/php-audit/php-8.5.5/Zend/zend_API.h:872
+    #11 0x55667a0a7719 in zend_objects_destroy_object /root/php-audit/php-8.5.5/Zend/zend_objects.c:172
+    #12 0x55667a0a4cc8 in zend_objects_store_del /root/php-audit/php-8.5.5/Zend/zend_objects_API.c:181
+    #13 0x55667a0f4419 in rc_dtor_func /root/php-audit/php-8.5.5/Zend/zend_variables.c:57
+    #14 0x556679ab27dc in i_zval_ptr_dtor /root/php-audit/php-8.5.5/Zend/zend_variables.h:45
+    #15 0x556679ab503e in var_destroy /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:309
+    #16 0x556679ab34a5 in php_var_unserialize_destroy /root/php-audit/php-8.5.5/ext/standard/var_unserializer.c:88
+    #17 0x556679acdb6a in php_unserialize_with_options /root/php-audit/php-8.5.5/ext/standard/var.c:1498
+    #18 0x556679ace12f in zif_unserialize /root/php-audit/php-8.5.5/ext/standard/var.c:1522
+    #19 0x556679e3c62d in ZEND_DO_ICALL_SPEC_RETVAL_UNUSED_HANDLER /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:1355
+    #20 0x556679f9bc99 in execute_ex /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:116414
+    #21 0x556679fafe9e in zend_execute /root/php-audit/php-8.5.5/Zend/zend_vm_execute.h:121902
+    #22 0x55667a10e870 in zend_execute_script /root/php-audit/php-8.5.5/Zend/zend.c:1977
+    #23 0x556679b5ded4 in php_execute_script_ex /root/php-audit/php-8.5.5/main/main.c:2641
+    #24 0x556679b5e2c8 in php_execute_script /root/php-audit/php-8.5.5/main/main.c:2681
+    #25 0x55667a1141c3 in do_cli /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:951
+    #26 0x55667a116764 in main /root/php-audit/php-8.5.5/sapi/cli/php_cli.c:1362
+    #27 0x7efdc9c29f67  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x29f67) (BuildId: 666f6ca8b64b431bce510d38dfe7792d7cf4202c)
+    #28 0x7efdc9c2a024 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a024) (BuildId: 666f6ca8b64b431bce510d38dfe7792d7cf4202c)
+    #29 0x556679002690 in _start (/root/php-audit/php-8.5.5/sapi/cli/php+0x402690) (BuildId: 1ae4f67489f6996db2a387f4ea4b4f9947b0bd1f)
+
+==1233661==Register values:
+rax = 0x08282828a827a829  rbx = 0x00007afdc7fd0ba0  rcx = 0x0000000000000000  rdx = 0x4141414141414149  
+rdi = 0x4141414141414141  rsi = 0x00000000000005db  rbp = 0x00007fffc251c6e0  rsp = 0x00007fffc251c6d0  
+ r8 = 0x00007efdc9d65340   r9 = 0x00000000fffffff3  r10 = 0x0000000000000000  r11 = 0x0000000000003401  
+r12 = 0x00007afdc7fd0b00  r13 = 0x00000f5fb8ffa160  r14 = 0x00007fffc251cb20  r15 = 0x00007fffc251c920  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /root/php-audit/php-8.5.5/Zend/zend_types.h:670 in zval_get_type
+==1233661==ABORTING

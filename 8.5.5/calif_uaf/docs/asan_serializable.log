@@ -1,0 +1,2 @@
+
+Deprecated: Evil implements the Serializable interface, which is deprecated. Implement __serialize() and __unserialize() instead (or in addition, if support for old PHP versions is necessary) in /work/poc/poc_serializable.php on line 37

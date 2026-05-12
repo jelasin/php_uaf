@@ -49,7 +49,11 @@ php_uaf/
 │       ├── run_poc.sh
 │       ├── run_exp.sh
 │       └── vuln-php/
-└── writeup.md                  # Detailed vulnerability analysis
+│   ├── writeup.md              # Version-specific writeup
+│   └── ...
+├── 7.2.1/
+│   ├── ...
+│   ├── writeup.md              # Version-specific writeup
 ```
 
 ## Quick Start
